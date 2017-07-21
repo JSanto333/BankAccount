@@ -9,32 +9,40 @@ namespace BankAccount
     //Derived class SavingsAccount should inherit the
     //funcionality of an Account, but also include a decimal instance variable indicating the interest rate
     //(percentage) assigned to the Account.
-    class SavingsAccount : Account 
+    class SavingsAccount : Account
     {
-        private decimal _interestRate;
+        
 
+        public SavingsAccount()
+        {
+            //default constructor 
+        }
         //SavingsAccount's constructor should receive the initial balance,
         //as well as an initial value for the interest rate.
-        public SavingsAccount(decimal balance, decimal interestRate) : base(balance)
+        public SavingsAccount(decimal balance)
         {
-
+            this.balance = balance;
         }
-
-        public decimal InterestRate
+        public decimal Deposit()
         {
-            get { return _interestRate; }
-            set
-            {
-                if (value > 0)
-                    _interestRate = value;
-                else
-                    throw new Exception("Interest rate must be greater than zero");
-            }
+            //if (credit > 0)
+            //    balance += credit;
+            return balance;
         }
-
-        public decimal CalculateInterest()
+        public decimal GetBalance(decimal balance)
         {
-            return Balance * InterestRate;
+            return Balance;
+        }
+        public override decimal Deposit(decimal credit)
+        {
+            balance = credit + balance;
+            return balance;
+        }
+        public override decimal Withdraw(decimal debit)
+        {
+            balance -= debit;
+            return balance;
+
         }
     }
 }

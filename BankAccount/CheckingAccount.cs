@@ -10,41 +10,35 @@ namespace BankAccount
     //variable that represents the fee charged per transaction.
     class CheckingAccount : Account
     {
-        private decimal _fee;
+        //protected decimal withdrawAmount;
+        //protected decimal depositAmount;
 
-        //constructor should receive the initial balance, as well as a parameter indicating a fee amount.
-        public CheckingAccount(decimal balance, decimal fee) : base(balance)
+        //public decimal WithdrawAmount { get; set; }
+        //public decimal DepositAmount { get; set; }
+        
+        
+        public CheckingAccount()
         {
-            Fee = fee;
+           //default constructor 
         }
-
-        public decimal Fee
+        public CheckingAccount(decimal balance)
         {
-            get { return _fee; }
-            set
-            {
-                if (value > 0)
-                    _fee = value;
-                else
-                    throw new Exception("Fee cannot be less than zero");
-            }
+            this.balance = balance;
         }
-
-        public override void Credit(decimal amount)
+        public decimal GetBalance(decimal balance)
         {
-            base.Credit(amount);
-            Balance -= Fee;
+            return balance;
         }
-
-        public override bool Debit(decimal amount)
+        public override decimal Deposit(decimal credit)
+        {           
+                balance = credit + balance;
+            return balance;
+        }
+        public override decimal Withdraw(decimal debit)
         {
-            if (base.Debit(amount))
-            {
-                Balance -= Fee;
-                return true;
-            }
-
-            return false;
+            balance -= debit;
+            return balance;
+                     
         }
     }
 }
